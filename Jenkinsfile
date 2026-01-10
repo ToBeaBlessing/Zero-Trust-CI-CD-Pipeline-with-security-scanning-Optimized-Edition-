@@ -90,7 +90,7 @@ pipeline {
         stage('Security Scan - Trivy') {
             environment {
                 // Force all tools to use the large disk for temp files
-                TMPDIR = "/home/ec2-user/tmp"
+                TMPDIR = "/var/lib/jenkins/tmp-trivy"
             }     
             steps {
                 sh """
