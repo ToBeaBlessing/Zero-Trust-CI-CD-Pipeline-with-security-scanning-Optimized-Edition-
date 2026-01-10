@@ -88,8 +88,12 @@ pipeline {
         }
         
         stage('Security Scan - Trivy') {
+            environment {
+                // Force all tools to use the large disk for temp files
+                TMPDIR = "/home/ec2-user/tmp"
+            }     
             steps {
-                sh '''
+                sh """
                     echo "=========================================="
                     echo "SECURITY GATE: Trivy Vulnerability Scan"
                     echo "=========================================="
@@ -97,9 +101,12 @@ pipeline {
                     echo ""
                     
                     # Generate detailed report
-                    /usr/local/bin/trivy image --format table \
+                    mkdir -p ${TMPDIR}
+                    /usr/local/bin/trivy --cache-dir /home/ec2-user/.cache/trivy \
+                        image --format table \
                         --output trivy-report.txt \
                         --skip-db-update \
+                        --skip-java-db-update \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
                     echo "--- FULL SCAN REPORT ---"
@@ -109,14 +116,17 @@ pipeline {
                     # Security Gate: Fail on CRITICAL or HIGH
                     echo ""
                     echo "Checking for ${TRIVY_SEVERITY} vulnerabilities..."
-                    trivy image --exit-code 1 \
+                    /usr/local/bin/trivy --cache-dir /home/ec2-user/.cache/trivy \
+                        image --exit-code 1 \
                         --severity ${TRIVY_SEVERITY} \
+                        --skip-db-update \
+                        --skip-java-db-update \
                         --no-progress \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
                     echo ""
                     echo "✅ SECURITY GATE PASSED - No ${TRIVY_SEVERITY} vulnerabilities found"
-                '''
+                """
             }
             post {
                 always {
