@@ -99,6 +99,7 @@ pipeline {
                     # Generate detailed report
                     /usr/local/bin/trivy image --format table \
                         --output trivy-report.txt \
+                        --skip-db-update \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
                     echo "--- FULL SCAN REPORT ---"
