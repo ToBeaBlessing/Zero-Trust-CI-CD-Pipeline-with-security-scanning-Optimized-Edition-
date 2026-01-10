@@ -2,8 +2,7 @@
  Zero-trust CI/CD pipeline with security scanning
 # Zero-Trust CI/CD Pipeline
 
-![Pipeline Status]
-
+[Pipeline Status]
 <img width="2085" height="942" alt="image" src="https://github.com/user-attachments/assets/c0b068c1-3c5d-4509-a328-2b154a979a31" />
 
 ## Overview
