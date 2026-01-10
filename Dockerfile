@@ -22,6 +22,10 @@ RUN mvn clean package -DskipTests -B
 # ============================================
 FROM eclipse-temurin:17-jre-alpine
 
+# SECURITY FIX: Update and upgrade OS packages to fix HIGH vulnerabilities
+# This resolves the gnupg and libpng issues found in your scan
+RUN apk update && apk upgrade --no-cache
+
 # Security: Run as non-root user
 RUN addgroup -g 1001 appgroup && \
     adduser -u 1001 -G appgroup -D appuser
