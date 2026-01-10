@@ -106,8 +106,6 @@ pipeline {
                     /usr/local/bin/trivy --cache-dir /var/lib/jenkins/trivy-cache \
                         image --format table \
                         --output trivy-report.txt \
-                        --skip-db-update \
-                        --skip-java-db-update \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
                     echo "--- FULL SCAN REPORT ---"
@@ -120,8 +118,6 @@ pipeline {
                     /usr/local/bin/trivy --cache-dir /var/lib/jenkins/trivy-cache \
                         image --exit-code 1 \
                         --severity ${TRIVY_SEVERITY} \
-                        --skip-db-update \
-                        --skip-java-db-update \
                         --no-progress \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
