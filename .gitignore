@@ -1,17 +1,36 @@
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-# https://maven.apache.org/wrapper/#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
 
-# Eclipse m2e generated files
-# Eclipse Core
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
 .project
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Build
+*.jar
+*.war
+*.ear
+
+# Docker
+.docker/
+
+# Jenkins
+.jenkins/
