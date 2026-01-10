@@ -102,7 +102,8 @@ pipeline {
                     
                     # Generate detailed report
                     mkdir -p ${TMPDIR}
-                    /usr/local/bin/trivy --cache-dir /home/ec2-user/.cache/trivy \
+                    # 1. Generate a detailed report using the Jenkins-owned cache
+                    /usr/local/bin/trivy --cache-dir /var/lib/jenkins/trivy-cache \
                         image --format table \
                         --output trivy-report.txt \
                         --skip-db-update \
@@ -116,7 +117,7 @@ pipeline {
                     # Security Gate: Fail on CRITICAL or HIGH
                     echo ""
                     echo "Checking for ${TRIVY_SEVERITY} vulnerabilities..."
-                    /usr/local/bin/trivy --cache-dir /home/ec2-user/.cache/trivy \
+                    /usr/local/bin/trivy --cache-dir /var/lib/jenkins/trivy-cache \
                         image --exit-code 1 \
                         --severity ${TRIVY_SEVERITY} \
                         --skip-db-update \
