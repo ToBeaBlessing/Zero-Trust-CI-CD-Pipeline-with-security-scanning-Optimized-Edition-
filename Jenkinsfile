@@ -97,7 +97,7 @@ pipeline {
                     echo ""
                     
                     # Generate detailed report
-                    trivy image --format table \
+                    /usr/local/bin/trivy image --format table \
                         --output trivy-report.txt \
                         ${ECR_REPO}:${IMAGE_TAG}
                     
