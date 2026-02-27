@@ -24,17 +24,6 @@ This project demonstrates Senior DevSecOps capabilities by solving real-world in
 
 ---
 
-## Resume Alignment
-
-| Resume Claim | Evidence in Code |
-|--------------|------------------|
-| "Built CI/CD pipelines (Jenkins, Docker)" | `Jenkinsfile` implementing Multi-stage builds. |
-| "Integrated security automation" | Trivy scans with strict failure gates on HIGH/CRITICAL CVEs. |
-| "Enforcing 95% security gate compliance" | Pipeline logic that blocks ECR push if any threshold is breached. |
-| "Optimized Cloud Infrastructure" | Custom User Data scripts and Swap configuration for cost-efficiency. |
-
----
-
 ## Tech Stack
 
 - **Cloud:** AWS (EC2 t3.small, ECR, S3, IAM, VPC, Security Groups)
